@@ -17,13 +17,13 @@ function onAddItemSubmit(e) {
 
   const newItem = itemInput.value;
 
-  // Validate Input
+  // telling user input is empty 
   if (newItem === '') {
     alert('Please add an item');
     return;
   }
 
-  // Check for edit mode
+  // Checking if user is trying to edit an item
   if (isEditMode) {
     const itemToEdit = itemList.querySelector('.edit-mode');
 
@@ -46,14 +46,16 @@ function onAddItemSubmit(e) {
 
   checkUI();
 
+  // clear value 
   itemInput.value = '';
 }
 
 function addItemToDOM(item) {
-  // Create list item
+  // Create list item <li> newItem </li>
   const li = document.createElement('li');
   li.appendChild(document.createTextNode(item));
 
+  // creating button and icon then add/append that button to the dom
   const button = createButton('remove-item btn-link text-red');
   li.appendChild(button);
 
@@ -97,7 +99,9 @@ function getItemsFromStorage() {
   return itemsFromStorage;
 }
 
+// removing and clearing the item
 function onClickItem(e) {
+  // if we click onthe x icon that has class name 'remove-item'
   if (e.target.parentElement.classList.contains('remove-item')) {
     removeItem(e.target.parentElement.parentElement);
   } else {
@@ -163,6 +167,7 @@ function filterItems(e) {
   items.forEach((item) => {
     const itemName = item.firstChild.textContent.toLowerCase();
 
+    // if input on filter matches any of the item display the item
     if (itemName.indexOf(text) != -1) {
       item.style.display = 'flex';
     } else {
@@ -171,6 +176,7 @@ function filterItems(e) {
   });
 }
 
+// checking ui for item. if none exist dont display clear or filter sections
 function checkUI() {
   itemInput.value = '';
 
